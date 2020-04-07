@@ -6,7 +6,7 @@ VERSION="v0.1 07/04/2020"
 if [ "$1" = "-h" ] || [ "$1" = "--help" ]  
 then
 echo "
-Modo de empleo: dockerc [OPCIONES]
+Modo de empleo: search  [OPCIONES]
 
 search                 -> Google
 search t               -> Traducción de una web con google translate
