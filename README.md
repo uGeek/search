@@ -1,7 +1,3 @@
-# search
-Search the internet for what you want from the terminal
-
-
 ## Install
 The first option is to install the application and respond to the word **search**.
 
