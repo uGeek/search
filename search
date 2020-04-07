@@ -1,0 +1,232 @@
+#!/bin/bash
+
+
+VERSION="v0.1 07/04/2020"
+
+if [ "$1" = "-h" ] || [ "$1" = "--help" ]  
+then
+echo "
+Modo de empleo: dockerc [OPCIONES]
+
+search                 -> Google
+search t               -> Traducción de una web con google translate
+search tt idioma       -> Google translate. Idioma= es,en,fr,it,de, ... 
+search d               -> Duck Duck Go
+search b               -> Bing
+search yh              -> Yahoo
+search yd              -> Yandex
+search sp              -> StartPage
+search y               -> YouTube
+search i               -> Google Image
+search m               -> Google Maps
+search gh              -> GitHub
+search r               -> Reddit
+search rs subreddit    -> SubReddit
+search w               -> Wikipedia
+search e               -> ebay
+search s               -> Spotify
+search dz              -> Deezer
+search trello          -> Trello
+search imdb            -> IMDB
+search -e              -> Abrir archivo de configuración, para cambiar el navegador
+search -h, --help      -> Ayuda
+
+search "$VERSION"
+ Copyright (C) 2020 Angel. uGeek
+ ugeekpodcast@gmail.com
+ https://ugeek.github.io
+"
+exit
+fi
+
+if [ ! -f ~/.config/search/search.conf ]; then
+mkdir -p ~/.config/search/
+echo -e "#  search  "$VERSION"\n#\n#     Copyright (C) 2020 Angel. uGeek\n#     ugeekpodcast@gmail.com\n#     https://ugeek.github.io\n#\n\nBROWSER='"firefox"'\nDEFAULT='g'" >  ~/.config/search/search.conf
+fi
+
+source ~/.config/search/search.conf
+
+if [ "$1" = "-e" ]
+then
+   $EDITOR   ~/.config/search/search.conf
+exit
+fi
+
+g="https://www.google.com/search?q="
+t="https://translate.google.com/translate?hl=en&sl=auto&tl=es&u="
+i="https://www.google.com/search?tbm=isch&q="
+gh="https://github.com/search?q="
+w="https://en.wikipedia.org/wiki/Special:Search?search="
+m="https://www.google.com/maps?q="
+d="https://duckduckgo.com/?q="
+sp="https://www.startpage.com/do/search?q="
+e="https://www.ebay.com/s+ch/?_nkw="
+a="https://www.amazon.es/exec/obidos/external-search/?field-keywords="$(echo $INPUT | sed s'| |%20|'g)"&mode=blended" 
+b="https://www.bing.com/search?setmkt=es-ES&q="
+y="https://www.youtube.com/results?search_query="
+yd="https://yandex.com/search/?text="
+imdb="https://www.imdb.com/find?s=all&q="
+trello="https://trello.com/search?q="
+dz="https://www.deezer.com/search/"
+s="https://open.spotify.com/search/"
+r="https://www.reddit.com/search?q="
+rs="https://www.reddit.com/r/$2/search?q="
+tt="https://translate.google.com/?source=osdd#auto|$2|"
+
+
+MT=$(echo $1)
+
+if [ "$1" = "" ]
+then
+   MT=$(echo $DEFAULT)    
+fi
+
+
+if [ "$MT" = "g" ]
+then
+    CMD="$BROWSER $g"
+    MOTOR="Google"
+fi
+
+
+if [ "$MT" = "t" ]
+then
+    CMD="$BROWSER $t"
+    MOTOR="Google Translate Web"
+fi
+
+if [ "$MT" = "i" ]
+then
+    CMD="$BROWSER $i"
+    MOTOR="Google Image"
+fi
+
+if [ "$MT" = "gh" ]
+then
+    CMD="$BROWSER $gh"
+    MOTOR="GitHub"
+fi
+
+if [ "$MT" = "w" ]
+then
+    CMD="$BROWSER $w" 
+    MOTOR="Wikipedia"
+fi
+
+if [ "$MT" = "m" ]
+then
+    CMD="$BROWSER $m"
+    MOTOR="Google Maps"
+fi
+
+if [ "$MT" = "d" ]
+then
+    CMD="$BROWSER $d"
+    MOTOR="Duck Duck Go"
+fi
+
+if [ "$MT" = "e" ]
+then
+    CMD="$BROWSER $e"
+    MOTOR="ebay"
+fi
+
+if [ "$MT" = "b" ]
+then
+    CMD="$BROWSER $b"
+    MOTOR="Bing"
+fi
+
+if [ "$MT" = "y" ]
+then
+    CMD="$BROWSER $y"
+    MOTOR="YouTube"
+fi
+
+if [ "$MT" = "yd" ]
+then
+    CMD="$BROWSER $y"
+    MOTOR="Yandex"
+fi
+
+if [ "$MT" = "imdb" ]
+then
+    CMD="$BROWSER $imdb"
+    MOTOR="IMDB"
+fi
+
+if [ "$MT" = "trello" ]
+then
+    CMD="$BROWSER $trello"
+    MOTOR="Trello"
+fi
+
+if [ "$MT" = "sp" ]
+then
+    CMD="$BROWSER $sp"
+    MOTOR="StartPage"
+fi
+
+if [ "$MT" = "dz" ]
+then
+    CMD="$BROWSER $dz"
+    MOTOR="Deezer"
+fi
+
+if [ "$MT" = "s" ]
+then
+    CMD="$BROWSER $s"
+    MOTOR="Spotify"
+fi
+
+if [ "$MT" = "r" ]
+then
+    CMD="$BROWSER $r"
+    MOTOR="Reddit"
+fi
+
+if [ "$MT" = "tt" ]
+then
+    CMD="$BROWSER $tt"
+    MOTOR="Google Translate Text"
+fi
+
+if [ "$MT" = "rs" ]
+then
+    CMD="$BROWSER $rs"
+    MOTOR="SubReddit"
+fi
+
+
+if [ "$MT" = "a" ]
+then
+    CMD="$BROWSER"
+    MOTOR="Amazon"
+    echo -en "\n \e[1mSearch\e[0m \e[31m$MOTOR\e[0m: "
+    read INPUT    
+    $CMD https://www.amazon.es/exec/obidos/external-search/?field-keywords="$(echo $INPUT | sed s'| |%20|'g)"&mode=blended
+    exit 1
+fi
+
+if [ "$MT" = "yh" ]
+then
+    CMD="$BROWSER"
+    MOTOR="Yahoo"
+    echo -en "\n \e[1mSearch\e[0m \e[31m$MOTOR\e[0m: "
+    read INPUT
+    $CMD https://search.yahoo.com/search?p="$(echo $INPUT | sed s'| |%20|'g)"&ei=UTF-8
+    exit 1
+fi
+
+
+if [ "$MOTOR" = "" ]
+then
+echo -en "\n\tEjecuta la opción -h o --help para ver la ayuda\n\n\t\t search -h\n"
+exit
+fi
+
+
+echo -en "\n \e[1mSearch\e[0m \e[31m$MOTOR\e[0m: "
+read INPUT
+$CMD$(echo $INPUT | sed s'| |%20|'g) &
+exit 1
