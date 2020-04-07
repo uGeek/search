@@ -85,7 +85,7 @@ Example: Translate text into French
 ```
 s tt fr
 ```
-(languages allowed)[https://cloud.google.com/translate/docs/languages]
+[languages allowed](https://cloud.google.com/translate/docs/languages)
 
 
 ## Contact
