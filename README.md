@@ -84,6 +84,26 @@ s tt fr
 [languages allowed](https://cloud.google.com/translate/docs/languages)
 
 
+## personalized
+Customize with your favorite search engines or options
+
+In the file **~/.config/search/search.engine** add them.
+
+Also, for this search, I will add in Brave Browser
+
+Example:
+
+```
+wl="https://es.wallapop.com/search?keywords="   # url with option. here "wl"
+
+if [ "$MT" = "wl" ]                             # add "wl"
+then
+    CMD="brave-browser  $wl"                    # add "wl". if you want the default browser, change brave-browser for $BROWSER
+    MOTOR="Wallapop"                            # name of engine "Wallapop"
+fi
+```
+
+
 ## Contact
 
 If you want to contact me you can reach me at https://ugeek.github.io.
