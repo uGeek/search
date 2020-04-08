@@ -1,5 +1,5 @@
 #!/bin/bash
-VERSION="v0.2 08/04/2020"
+VERSION="v0.3 08/04/2020"
 #     Copyright (C) 2020 Angel. uGeek
 #     ugeekpodcast@gmail.com
 #     https://ugeek.github.io
@@ -45,6 +45,7 @@ fi
 if [ ! -f ~/.config/search/search.conf ]; then
 mkdir -p ~/.config/search/
 echo -e "#  search  "$VERSION"\n#\n#     Copyright (C) 2020 Angel. uGeek\n#     ugeekpodcast@gmail.com\n#     https://ugeek.github.io\n#\n\nBROWSER='"firefox"'\nDEFAULT='g'\nLANG='es'" >  ~/.config/search/search.conf
+touch ~/.config/search/search.engine
 fi
 
 source ~/.config/search/search.conf
@@ -230,6 +231,8 @@ then
     $CMD https://search.yahoo.com/search?p="$(echo $INPUT | sed s'| |%20|'g)"&ei=UTF-8
     exit 1
 fi
+
+source ~/.config/search/search.engine
 
 if [ "$MOTOR" = "" ]
 then
