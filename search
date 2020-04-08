@@ -26,6 +26,8 @@ search gh              -> GitHub
 search r               -> Reddit
 search rs subreddit    -> SubReddit
 search w               -> Wikipedia
+search wl              -> Wallapop
+search ax              -> AliExpress
 search e               -> ebay
 search s               -> Spotify
 search dz              -> Deezer
@@ -78,6 +80,8 @@ rs="https://www.reddit.com/r/$2/search?q="
 tt="https://translate.google.com/?source=ugeek/search#auto|$2|"
 s="https://www.google.com/search?client=ugeek/search=&q=site%3A"$2"+"
 tb="https://www.translatetheweb.com/?from=auto&to="$LANG"&ref=SERP&refd=www.bing.com&dl="$LANG"&rr=UC&a="
+wl="https://es.wallapop.com/search?keywords="
+ax="https://es.aliexpress.com/wholesale?"$LANG"Id=0&initiative_id=&SearchText="
 
 MT=$(echo $1)
 
@@ -210,6 +214,18 @@ if [ "$MT" = "tb" ]
 then
     CMD="$BROWSER $tb"
     MOTOR="Bing Translate Web"
+fi
+
+if [ "$MT" = "ax" ]
+then
+    CMD="$BROWSER  $ax"
+    MOTOR="AliExpress"
+fi
+
+if [ "$MT" = "wl" ]
+then
+    CMD="$BROWSER  $wl"
+    MOTOR="Wallapop"
 fi
 
 if [ "$MT" = "a" ]
