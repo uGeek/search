@@ -37,6 +37,8 @@ search gh           -> GitHub
 search r            -> Reddit
 search rs subreddit -> SubReddit
 search w            -> Wikipedia
+search wl           -> Wallapop
+search ax           -> AliExpress
 search e            -> ebay
 search s            -> Spotify
 search dz           -> Deezer
