@@ -3,11 +3,6 @@ The first option is to install the application and respond to the word **search*
 
 I like to use the letter **s**, which is faster
 
-Using command the word "**search**"
-
-```
-sudo curl -L https://raw.githubusercontent.com/uGeek/search/master/search \
-          -o /usr/bin/search && sudo chmod +x /usr/bin/search
 ```
 
 Using command the word "**s**"
@@ -22,30 +17,30 @@ sudo curl -L https://raw.githubusercontent.com/uGeek/search/master/search \
 ```
 How to use: search [OPTIONS]
 
-search              -> Google
-search t            -> Translation of a website with google translate
-search tt language  -> Google translate. Language = es, en, fr, it, de, ...
-search d            -> Duck Duck Go
-search b            -> Bing
-search yh           -> Yahoo
-search yd           -> Yandex
-search sp           -> StartPage
-search and          -> YouTube
-search i            -> Google Image
-search m            -> Google Maps
-search gh           -> GitHub
-search r            -> Reddit
-search rs subreddit -> SubReddit
-search w            -> Wikipedia
-search wl           -> Wallapop
-search ax           -> AliExpress
-search e            -> ebay
-search s            -> Spotify
-search dz           -> Deezer
-search trello       -> Trello
-search imdb         -> IMDB
-search -e           -> Open configuration file, to change the browser
-search -h, --help   -> Help
+s              -> Google
+s t            -> Translation of a website with google translate
+s tt language  -> Google translate. Language = es, en, fr, it, de, ...
+s d            -> Duck Duck Go
+s b            -> Bing
+s yh           -> Yahoo
+s yd           -> Yandex
+s sp           -> StartPage
+s and          -> YouTube
+s i            -> Google Image
+s m            -> Google Maps
+s gh           -> GitHub
+s r            -> Reddit
+s rs subreddit -> SubReddit
+s w            -> Wikipedia
+s wl           -> Wallapop
+s ax           -> AliExpress
+s e            -> ebay
+s s            -> Spotify
+s dz           -> Deezer
+s trello       -> Trello
+s imdb         -> IMDB
+s -e           -> Open configuration file, to change the browser
+s -h, --help   -> Help
 
 search v0.1 04/07/2020
  Copyright (C) 2020 Angel. uGeek
