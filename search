@@ -1,5 +1,5 @@
 #!/bin/bash
-VERSION="v0.4 09/04/2020"
+VERSION="v0.5 09/04/2020"
 #     Copyright (C) 2020 Angel. uGeek
 #     ugeekpodcast@gmail.com
 #     https://ugeek.github.io
@@ -57,6 +57,23 @@ search "$VERSION"
  https://ugeek.github.io
 "
 exit
+fi
+
+SOFT=$(diff -q  /usr/bin/s <(wget -q -O- https://raw.githubusercontent.com/uGeek/search/master/search 2>/dev/null))
+
+if [ "$(cat ~/.config/search/last.log 2>/dev/null)" != "$(date +"%Y%m%d")" ]
+then
+echo $(date +"%Y%m%d") >  ~/.config/search/last.log
+if [ "$SOFT" = "" ]
+then
+echo "" 2>/dev/null
+else
+echo
+echo -e "\n\e[31mHay una nueva actualización de la aplicación\e[0m \e[1msearch\e[0m\n\t\e[92mva a procederse la instalación\e[0m\n"
+sudo curl -L https://raw.githubusercontent.com/uGeek/search/master/search \
+          -o /usr/bin/s && sudo chmod +x /usr/bin/s
+exit 0
+fi
 fi
 
 if [ ! -f ~/.config/search/search.conf ]; then
