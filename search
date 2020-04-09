@@ -72,6 +72,8 @@ echo
 echo -e "\n\e[31mHay una nueva actualización de la aplicación\e[0m \e[1msearch\e[0m\n\t\e[92mva a procederse la instalación\e[0m\n"
 sudo curl -L https://raw.githubusercontent.com/uGeek/search/master/search \
           -o /usr/bin/s && sudo chmod +x /usr/bin/s
+clear	  
+echo -e "\n\e[92mVersión $VERSION actualizada con éxito!!!\e[0m\n"	  
 exit 0
 fi
 fi
