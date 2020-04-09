@@ -3,8 +3,6 @@ The first option is to install the application and respond to the word **search*
 
 I like to use the letter **s**, which is faster
 
-```
-
 Using command the word "**s**"
 
 ```
