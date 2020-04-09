@@ -1,5 +1,5 @@
 #!/bin/bash
-VERSION="v0.3 08/04/2020"
+VERSION="v0.4 09/04/2020"
 #     Copyright (C) 2020 Angel. uGeek
 #     ugeekpodcast@gmail.com
 #     https://ugeek.github.io
@@ -12,25 +12,40 @@ Modo de empleo: search [OPCIONES]
 search                 -> Google
 search t               -> Traducción de una web con google translate
 search tb              -> Traducción de una web con bing translate
-search tt idioma       -> Google translate. Idioma= es,en,fr,it,de, ... 
+search tt  idioma      -> Google translate. Idioma= es,en,fr,it,de, ... 
+search tts idioma      -> Lee en voz alta desde Google translate. Idioma= es,en,fr,it,de, ...
+search bm              -> Muestra y abre una url de tus Booknarks
+search bm nº_bookmark  -> Lanza el Bookmark indicando el nº
+search bmls            -> Lista todos los Bookmarks
+search bma             -> Añade un Bookmark
+search bmp             -> Añade desde tu portapapeles un Bookmark
+search bme             -> Edita tus Bookmarks
 search s  url_web      -> Buscar en una web. Site
+search sbm             -> Buscar en una web de tus Bookmarks
 search d               -> Duck Duck Go
 search b               -> Bing
 search yh              -> Yahoo
 search yd              -> Yandex
 search sp              -> StartPage
 search y               -> YouTube
+search tw              -> Twitter
+search twt             -> Twitter tendencias
 search i               -> Google Image
 search m               -> Google Maps
 search gh              -> GitHub
+search gl              -> GitLab
 search r               -> Reddit
 search rs subreddit    -> SubReddit
 search w               -> Wikipedia
 search wl              -> Wallapop
 search ax              -> AliExpress
 search e               -> ebay
-search s               -> Spotify
+search sf              -> Spotify
 search dz              -> Deezer
+search ym              -> YouTube Music
+search p               -> Google Podcast
+search dp              -> Dropbox Paper
+search t               -> Buscar y ver Canales en Telegram
 search trello          -> Trello
 search imdb            -> IMDB
 search -e              -> Abrir archivo de configuración, para cambiar el navegador
@@ -46,7 +61,7 @@ fi
 
 if [ ! -f ~/.config/search/search.conf ]; then
 mkdir -p ~/.config/search/
-echo -e "#  search  "$VERSION"\n#\n#     Copyright (C) 2020 Angel. uGeek\n#     ugeekpodcast@gmail.com\n#     https://ugeek.github.io\n#\n\nBROWSER='"firefox"'\nDEFAULT='g'\nLANG='es'" >  ~/.config/search/search.conf
+echo -e "#  search  "$VERSION"\n#\n#     Copyright (C) 2020 Angel. uGeek\n#     ugeekpodcast@gmail.com\n#     https://ugeek.github.io\n#\n\nBROWSER='"firefox"'\nDEFAULT='g'\nLANG='es'\nBOOKMARKS='"$(echo $HOME)"/.config/search/search.urls' # Necesario ruta completa" >  ~/.config/search/search.conf
 touch ~/.config/search/search.engine
 fi
 
@@ -74,7 +89,7 @@ yd="https://yandex.com/search/?text="
 imdb="https://www.imdb.com/find?s=all&q="
 trello="https://trello.com/search?q="
 dz="https://www.deezer.com/search/"
-s="https://open.spotify.com/search/"
+sf="https://open.spotify.com/search/"
 r="https://www.reddit.com/search?q="
 rs="https://www.reddit.com/r/$2/search?q="
 tt="https://translate.google.com/?source=ugeek/search#auto|$2|"
@@ -82,6 +97,13 @@ s="https://www.google.com/search?client=ugeek/search=&q=site%3A"$2"+"
 tb="https://www.translatetheweb.com/?from=auto&to="$LANG"&ref=SERP&refd=www.bing.com&dl="$LANG"&rr=UC&a="
 wl="https://es.wallapop.com/search?keywords="
 ax="https://es.aliexpress.com/wholesale?"$LANG"Id=0&initiative_id=&SearchText="
+p="https://podcasts.google.com/?q="
+dp="https://paper.dropbox.com/#q="
+ym="https://music.youtube.com/search?q="
+gl="https://gitlab.com/search?utf8=✓&snippets=&scope=&repository_ref=&search="
+t="https://t.me/s/"
+tw="https://twitter.com/search?q="
+twt="https://twitter.com/i/trends"
 
 MT=$(echo $1)
 
@@ -180,7 +202,7 @@ then
     MOTOR="Deezer"
 fi
 
-if [ "$MT" = "s" ]
+if [ "$MT" = "sf" ]
 then
     CMD="$BROWSER $s"
     MOTOR="Spotify"
@@ -228,13 +250,148 @@ then
     MOTOR="Wallapop"
 fi
 
+if [ "$MT" = "p" ]
+then
+    CMD="$BROWSER  $p"
+    MOTOR="Podcast"
+fi
+
+if [ "$MT" = "dp" ]
+then
+    CMD="$BROWSER  $dp"
+    MOTOR="Dropbox Paper"
+fi
+
+if [ "$MT" = "ym" ]
+then
+    CMD="$BROWSER  $ym"
+    MOTOR="YouTube Music"
+fi
+
+if [ "$MT" = "gl" ]
+then
+    CMD="$BROWSER  $gl"
+    MOTOR="GitLab"
+fi
+
+if [ "$MT" = "t" ]
+then
+    CMD="$BROWSER  $t"
+    MOTOR="Telegram"
+fi
+
+if [ "$MT" = "tw" ]
+then
+    CMD="$BROWSER  $tw"
+    MOTOR="Twitter"
+fi
+
+
+if [ "$MT" = "twt" ]
+then
+    CMD="$BROWSER  $twt"
+    MOTOR=" Tendencias de Twitter"
+    nohup $CMD 2>/dev/null  &
+    exit 1
+fi
+
+
+if [ "$MT" = "tts" ]
+then
+    CMD="$BROWSER"
+    MOTOR="lee en voz alta desde tts de Google"
+    echo -en "\n \e[1mSearch\e[0m \e[31m$MOTOR\e[0m: "
+    read INPUT    
+    nohup $CMD "https://translate.google.com/translate_tts?ie=UTF-8&total=1&idx=0&textlen=32&client=tw-ob&q="$(echo $INPUT | sed s'| |+|'g)"&tl=$2" 2>/dev/null  &
+    exit 1
+fi
+
+if [ "$MT" = "bma" ]
+then
+    echo -en "\n \e[31mAñade un Bookmarks\e[0m"
+    echo -en "\n\n   \e[1mNombre:\e[0m "
+    read NOM
+    echo -en "   \e[1murl:    \e[0m"
+    read URL
+    echo ""$URL" "$NOM"" >>  $BOOKMARKS 
+    exit 1
+fi
+
+if [ "$MT" = "bm" ]
+then
+if [ "$2" = "" ]
+then
+    CMD="$BROWSER"
+    MOTOR="Seleccina el Bookmarks"
+    echo ""
+    echo -e "    \e[4mListado de Bookmarks\e[0m"
+    cat  $BOOKMARKS | cut -d" " -f2- | nl -s ". " | sed '/^ *$/d'
+    echo -en "\n \e[1mSearch\e[0m \e[31m$MOTOR\e[0m: "
+    read INPUT
+    nohup $CMD $(cat  $BOOKMARKS | cut -d" " -f1  | sed -n "$INPUT"p) 2>/dev/null  &
+    exit 1
+else
+    CMD="$BROWSER"
+    nohup $CMD  $(cat  $BOOKMARKS | cut -d" " -f1  | sed -n "$2"p) 2>/dev/null  &
+    exit 1
+fi
+fi
+
+if [ "$MT" = "bmls" ]
+then
+    echo ""
+    echo -e "    \e[4mListado de Bookmarks\e[0m"
+    cat  $BOOKMARKS | cut -d" " -f2- | nl -s ". " | sed '/^ *$/d'
+    exit 1
+fi
+
+if [ "$MT" = "bme" ]
+then
+    $EDITOR  $BOOKMARKS 
+    exit 1
+fi
+
+if [ "$MT" = "bmp" ]
+then
+    COPY=$(xclip -o)
+    NAME=$(wget -q -O- $(echo $COPY) | sed -n 's/.*<title>\(.*\)<\/title>.*/\1/ip;T;q')
+    echo -en "\n\e[31mLa siguiente página será añadida a Bookmarks\e[0m \n"
+    echo -e "\e[1mNombre: \e[0m$NAME\n\e[1murl:    \e[0m$COPY"
+    echo ""
+    while true; do
+        echo ""
+        read -rp "¿Quieres añadir una anotación sobre la url? (s/n) " yn
+        case "${yn}" in
+            [Ss]* ) echo -en "\n Nota: "
+		    read NOTE ; echo "$COPY $NAME - $NOTE" >> $BOOKMARKS
+		    break;;
+            [Nn]* ) echo "$COPY $NAME" >> $BOOKMARKS ; exit;;
+            * ) echo "Please answer y or n";;
+        esac
+    done
+    exit 1
+fi
+
+if [ "$MT" = "sbm" ]
+then
+    CMD="$BROWSER"
+    MOTOR="Introduce las palabras que quieres buscar"
+    echo ""
+    echo -e "    \e[4mListado de Bookmarks\e[0m"
+    cat  $BOOKMARKS | cut -d" " -f2- | nl -s ". " | sed '/^ *$/d'
+    echo -en "\n \e[31mSeleccina en que url quieres buscar\e[0m: "
+    read URL
+    SITE="https://www.google.com/search?client=ugeek/search=&q=site%3A"$(cat $BOOKMARKS | cut -d" " -f1  | sed -n ""$URL""p)"+"
+    CMD="$BROWSER $SITE"
+fi
+
 if [ "$MT" = "a" ]
 then
     CMD="$BROWSER"
     MOTOR="Amazon"
     echo -en "\n \e[1mSearch\e[0m \e[31m$MOTOR\e[0m: "
     read INPUT    
-    $CMD https://www.amazon.es/exec/obidos/external-search/?field-keywords="$(echo $INPUT | sed s'| |%20|'g)"&mode=blended
+    nohup $CMD https://www.amazon.es/exec/obidos/external-search/?field-keywords="$(echo $INPUT | sed s'| |%20|'g)"&mode=blended 2>/dev/null  &
     exit 1
 fi
 
@@ -244,7 +401,7 @@ then
     MOTOR="Yahoo"
     echo -en "\n \e[1mSearch\e[0m \e[31m$MOTOR\e[0m: "
     read INPUT
-    $CMD https://search.yahoo.com/search?p="$(echo $INPUT | sed s'| |%20|'g)"&ei=UTF-8
+    nohup $CMD https://search.yahoo.com/search?p="$(echo $INPUT | sed s'| |%20|'g)"&ei=UTF-8 2>/dev/null  &
     exit 1
 fi
 
@@ -258,5 +415,5 @@ fi
 
 echo -en "\n \e[1mSearch\e[0m \e[31m$MOTOR\e[0m: "
 read INPUT
-$CMD$(echo $INPUT | sed s'| |%20|'g) &
+nohup $CMD$(echo $INPUT | sed s'| |%20|'g) 2>/dev/null  &
 exit 1
