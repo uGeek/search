@@ -45,7 +45,7 @@ search dz              -> Deezer
 search ym              -> YouTube Music
 search p               -> Google Podcast
 search dp              -> Dropbox Paper
-search t               -> Buscar y ver Canales en Telegram
+search tl              -> Buscar y ver Canales en Telegram
 search trello          -> Trello
 search imdb            -> IMDB
 search -e              -> Abrir archivo de configuración, para cambiar el navegador
@@ -274,9 +274,9 @@ then
     MOTOR="GitLab"
 fi
 
-if [ "$MT" = "t" ]
+if [ "$MT" = "tl" ]
 then
-    CMD="$BROWSER  $t"
+    CMD="$BROWSER  $tl"
     MOTOR="Telegram"
 fi
 
