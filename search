@@ -1,55 +1,55 @@
 #!/bin/bash
-VERSION="v0.5 09/04/2020"
+VERSION="v0.5.1 10/04/2020"
 #     Copyright (C) 2020 Angel. uGeek
 #     ugeekpodcast@gmail.com
 #     https://ugeek.github.io
 
-if [ "$1" = "-h" ] || [ "$1" = "--help" ]  
+if [ "$1" = "-h" ] || [ "$1" = "--help" ] || [ "$1" = "h" ]  
 then
 echo "
 Modo de empleo: search [OPCIONES]
 
-search                 -> Google
-search t               -> Traducción de una web con google translate
-search tb              -> Traducción de una web con bing translate
-search tt  idioma      -> Google translate. Idioma= es,en,fr,it,de, ... 
-search tts idioma      -> Lee en voz alta desde Google translate. Idioma= es,en,fr,it,de, ...
-search bm              -> Muestra y abre una url de tus Booknarks
-search bm nº_bookmark  -> Lanza el Bookmark indicando el nº
-search bmls            -> Lista todos los Bookmarks
-search bma             -> Añade un Bookmark
-search bmp             -> Añade desde tu portapapeles un Bookmark
-search bme             -> Edita tus Bookmarks
-search s  url_web      -> Buscar en una web. Site
-search sbm             -> Buscar en una web de tus Bookmarks
-search d               -> Duck Duck Go
-search b               -> Bing
-search yh              -> Yahoo
-search yd              -> Yandex
-search sp              -> StartPage
-search y               -> YouTube
-search tw              -> Twitter
-search twt             -> Twitter tendencias
-search i               -> Google Image
-search m               -> Google Maps
-search gh              -> GitHub
-search gl              -> GitLab
-search r               -> Reddit
-search rs subreddit    -> SubReddit
-search w               -> Wikipedia
-search wl              -> Wallapop
-search ax              -> AliExpress
-search e               -> ebay
-search sf              -> Spotify
-search dz              -> Deezer
-search ym              -> YouTube Music
-search p               -> Google Podcast
-search dp              -> Dropbox Paper
-search tl              -> Buscar y ver Canales en Telegram
-search trello          -> Trello
-search imdb            -> IMDB
-search -e              -> Abrir archivo de configuración, para cambiar el navegador
-search -h, --help      -> Ayuda
+s                   -> Google
+s   t               -> Traducción de una web con google translate
+s   tb              -> Traducción de una web con bing translate
+s   tt  idioma      -> Google translate. Idioma= es,en,fr,it,de, ... 
+s   tts idioma      -> Lee en voz alta desde Google translate. Idioma= es,en,fr,it,de, ...
+s   bm              -> Muestra y abre una url de tus Booknarks
+s   bm nº_bookmark  -> Lanza el Bookmark indicando el nº
+s   bmls            -> Lista todos los Bookmarks
+s   bma             -> Añade un Bookmark
+s   bmp             -> Añade desde tu portapapeles un Bookmark
+s   bme             -> Edita tus Bookmarks
+s   s  url_web      -> Buscar en una web. Site
+s   sbm             -> Buscar en una web de tus Bookmarks
+s   d               -> Duck Duck Go
+s   b               -> Bing
+s   yh              -> Yahoo
+s   yd              -> Yandex
+s   sp              -> StartPage
+s   y               -> YouTube
+s   tw              -> Twitter
+s   twt             -> Twitter tendencias
+s   i               -> Google Image
+s   m               -> Google Maps
+s   gh              -> GitHub
+s   gl              -> GitLab
+s   r               -> Reddit
+s   rs subreddit    -> SubReddit
+s   w               -> Wikipedia
+s   wl              -> Wallapop
+s   ax              -> AliExpress
+s   eb              -> ebay
+s   sf              -> Spotify
+s   dz              -> Deezer
+s   ym              -> YouTube Music
+s   p               -> Google Podcast
+s   dp              -> Dropbox Paper
+s   tl              -> Buscar y ver Canales en Telegram
+s   trello          -> Trello
+s   imdb            -> IMDB
+s   e               -> Abrir archivo de configuración, para cambiar el navegador
+s   h, -h, --help   -> Ayuda
 
 search "$VERSION"
  Copyright (C) 2020 Angel. uGeek
@@ -86,7 +86,7 @@ fi
 
 source ~/.config/search/search.conf
 
-if [ "$1" = "-e" ]
+if [ "$1" = "e" ]
 then
    $EDITOR   ~/.config/search/search.conf
 exit
@@ -100,7 +100,7 @@ w="https://en.wikipedia.org/wiki/Special:Search?search="
 m="https://www.google.com/maps?q="
 d="https://duckduckgo.com/?q="
 sp="https://www.startpage.com/do/search?q="
-e="https://www.ebay.com/s+ch/?_nkw="
+eb="https://www.ebay.com/s+ch/?_nkw="
 a="https://www.amazon.es/exec/obidos/external-search/?field-keywords="$(echo $INPUT | sed s'| |%20|'g)"&mode=blended" 
 b="https://www.bing.com/search?setmkt=es-ES&q="
 y="https://www.youtube.com/results?search_query="
@@ -173,9 +173,9 @@ then
     MOTOR="Duck Duck Go"
 fi
 
-if [ "$MT" = "e" ]
+if [ "$MT" = "eb" ]
 then
-    CMD="$BROWSER $e"
+    CMD="$BROWSER $eb"
     MOTOR="ebay"
 fi
 
@@ -410,7 +410,7 @@ then
     MOTOR="Amazon"
     echo -en "\n \e[1mSearch\e[0m \e[31m$MOTOR\e[0m: "
     read INPUT    
-    nohup $CMD https://www.amazon.es/exec/obidos/external-search/?field-keywords="$(echo $INPUT | sed s'| |%20|'g)"&mode=blended 2>/dev/null  &
+    nohup $CMD "https://www.amazon.es/exec/obidos/external-search/?field-keywords="$(echo $INPUT | sed s'| |%20|'g)"&mode=blended" 2>/dev/null &
     exit 1
 fi
 
@@ -420,7 +420,7 @@ then
     MOTOR="Yahoo"
     echo -en "\n \e[1mSearch\e[0m \e[31m$MOTOR\e[0m: "
     read INPUT
-    nohup $CMD https://search.yahoo.com/search?p="$(echo $INPUT | sed s'| |%20|'g)"&ei=UTF-8 2>/dev/null  &
+    nohup $CMD "https://search.yahoo.com/search?p="$(echo $INPUT | sed s'| |%20|'g)"&ei=UTF-8" 2>/dev/null &
     exit 1
 fi
 
