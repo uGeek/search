@@ -1,5 +1,5 @@
 #!/bin/bash
-VERSION="v0.5.1 10/04/2020"
+VERSION="v0.5.2 10/04/2020"
 #     Copyright (C) 2020 Angel. uGeek
 #     ugeekpodcast@gmail.com
 #     https://ugeek.github.io
@@ -48,6 +48,7 @@ s   dp              -> Dropbox Paper
 s   tl              -> Buscar y ver Canales en Telegram
 s   trello          -> Trello
 s   imdb            -> IMDB
+s   tm              -> TheMovieDb
 s   e               -> Abrir archivo de configuración, para cambiar el navegador
 s   h, -h, --help   -> Ayuda
 
@@ -123,6 +124,7 @@ gl="https://gitlab.com/search?utf8=✓&snippets=&scope=&repository_ref=&search="
 tl="https://t.me/s/"
 tw="https://twitter.com/search?q="
 twt="https://twitter.com/i/trends"
+tm="https://www.themoviedb.org/search?language="$LANG"&query="
 
 MT=$(echo $1)
 
@@ -314,6 +316,11 @@ then
     exit 1
 fi
 
+if [ "$MT" = "tm" ]
+then
+    CMD="$BROWSER $tm"
+    MOTOR="TheMovieDb"
+fi
 
 if [ "$MT" = "tts" ]
 then
