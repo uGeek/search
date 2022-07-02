@@ -1,5 +1,5 @@
 #!/bin/bash
-VERSION="v0.5.2 10/04/2020"
+VERSION="v0.5.3 10/04/2020"
 #     Copyright (C) 2020 Angel. uGeek
 #     ugeekpodcast@gmail.com
 #     https://ugeek.github.io
@@ -60,7 +60,10 @@ search "$VERSION"
 exit
 fi
 
-SOFT=$(diff -q  /usr/bin/s <(wget -q -O- https://raw.githubusercontent.com/uGeek/search/master/search 2>/dev/null))
+mkdir -p $HOME/.config/search/
+
+
+SOFT=$(diff -q  /usr/bin/sx <(wget -q -O- https://raw.githubusercontent.com/uGeek/search/master/search 2>/dev/null))
 
 if [ "$(cat ~/.config/search/last.log 2>/dev/null)" != "$(date +"%Y%m%d")" ]
 then
