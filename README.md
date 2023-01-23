@@ -7,7 +7,7 @@ Using command the word "**s**"
 
 ```
 sudo curl -L https://raw.githubusercontent.com/uGeek/search/master/search \
-          -o /usr/bin/s && sudo chmod +x /usr/bin/s
+          -o /usr/bin/sx && sudo chmod +x /usr/bin/sx
 ```
 
 ## Help
