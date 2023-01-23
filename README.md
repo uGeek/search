@@ -101,6 +101,28 @@ fi
 ```
 
 
+## Change the default search engine
+
+Add in config file
+Exem: Change the default search engine
+
+
+
+```
+#  # Utilizar buscador por defecto personalizado
+#  MT=$(echo $1)
+#  if [ "$1" = "" ] ; then MT=$(echo $DEFAULT) ; fi
+#  
+#  # SearXNG   Instance: https://searx.work/
+#  sx="https://searx.work/search?q="
+#  if [ "$MT" = "sx" ] ; then  CMD="$BROWSER  $sx" ;  MOTOR="SearXNG" ; fi
+
+```
+
+
+
+
+
 ## Contact
 
 If you want to contact me you can reach me at https://ugeek.github.io.
