@@ -106,24 +106,22 @@ fi
 
 ## Change the default search engine
 
-Add in config file
+Add in config file **search.engine**
 Exem: Change the default search engine
 
 
-
 ```
-#  # Utilizar buscador por defecto personalizado
-#  MT=$(echo $1)
-#  if [ "$1" = "" ] ; then MT=$(echo $DEFAULT) ; fi
-#  
-#  # SearXNG   Instance: https://searx.work/
-#  sx="https://searx.work/search?q="
-#  if [ "$MT" = "sx" ] ; then  CMD="$BROWSER  $sx" ;  MOTOR="SearXNG" ; fi
-
+# SearXNG   Instance: https://searx.work/
+sx="https://searx.work/search?q="
+if [ "$MT" = "sx" ] ; then  CMD="$BROWSER  $sx" ;  MOTOR="SearXNG" ; fi
 ```
 
 
+## Firefox private
 
+```
+firefox --private-window
+```
 
 
 ## Contact
