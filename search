@@ -99,7 +99,7 @@ source ~/.config/search/search.conf
 
 if [ "$1" = "e" ]
 then
-   $EDITOR   ~/.config/search/search.conf
+   vi   ~/.config/search/search.conf
 exit
 fi
 
