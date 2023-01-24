@@ -15,30 +15,30 @@ sudo curl -L https://raw.githubusercontent.com/uGeek/search/master/search \
 ```
 How to use: search [OPTIONS]
 
-s              -> Google
-s t            -> Translation of a website with google translate
-s tt language  -> Google translate. Language = es, en, fr, it, de, ...
-s d            -> Duck Duck Go
-s b            -> Bing
-s yh           -> Yahoo
-s yd           -> Yandex
-s sp           -> StartPage
-s and          -> YouTube
-s i            -> Google Image
-s m            -> Google Maps
-s gh           -> GitHub
-s r            -> Reddit
-s rs subreddit -> SubReddit
-s w            -> Wikipedia
-s wl           -> Wallapop
-s ax           -> AliExpress
-s e            -> ebay
-s s            -> Spotify
-s dz           -> Deezer
-s trello       -> Trello
-s imdb         -> IMDB
-s -e           -> Open configuration file, to change the browser
-s -h, --help   -> Help
+sx              -> Google
+sx t            -> Translation of a website with google translate
+sx tt language  -> Google translate. Language = es, en, fr, it, de, ...
+sx d            -> Duck Duck Go
+sx b            -> Bing
+sx yh           -> Yahoo
+sx yd           -> Yandex
+sx sp           -> StartPage
+sx and          -> YouTube
+sx i            -> Google Image
+sx m            -> Google Maps
+sx gh           -> GitHub
+sx r            -> Reddit
+sx rs subreddit -> SubReddit
+sx w            -> Wikipedia
+sx wl           -> Wallapop
+sx ax           -> AliExpress
+sx e            -> ebay
+sx s            -> Spotify
+sx dz           -> Deezer
+sx trello       -> Trello
+sx imdb         -> IMDB
+sx -e           -> Open configuration file, to change the browser
+sx -h, --help   -> Help
 
 search v0.1 04/07/2020
  Copyright (C) 2020 Angel. uGeek
