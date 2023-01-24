@@ -1,5 +1,5 @@
 #!/bin/bash
-VERSION="v0.5.3 10/04/2020"
+VERSION="v0.5.5 24/01/2023"
 #     Copyright (C) 2020 Angel. uGeek
 #     ugeekpodcast@gmail.com
 #     https://ugeek.github.io
@@ -364,11 +364,13 @@ then
     cat  $BOOKMARKS | cut -d" " -f2- | nl -s ". " | sed '/^ *$/d'
     echo -en "\n \e[1mSearch\e[0m \e[31m$MOTOR\e[0m: "
     read INPUT
-    nohup $CMD $(cat  $BOOKMARKS | cut -d" " -f1  | sed -n "$INPUT"p) 2>/dev/null  &
+    if [ "$TERMINAL" = "y" ] ; then   $CMD $(cat  $BOOKMARKS | cut -d" " -f1  | sed -n "$INPUT"p) ; exit  ; fi
+    nohup $CMD $(cat  $BOOKMARKS | cut -d" " -f1  | sed -n "$INPUT"p) 2>/dev/null &
     exit 1
 else
     CMD="$BROWSER"
-    nohup $CMD  $(cat  $BOOKMARKS | cut -d" " -f1  | sed -n "$2"p) 2>/dev/null  &
+    if [ "$TERMINAL" = "y" ] ; then   $CMD $(cat  $BOOKMARKS | cut -d" " -f1  | sed -n "$INPUT"p) ; exit  ; fi
+    nohup $CMD $(cat  $BOOKMARKS | cut -d" " -f1  | sed -n "$INPUT"p) 2>/dev/null &
     exit 1
 fi
 fi
@@ -377,9 +379,10 @@ if [ "$MT" = "bmls" ]
 then
     echo ""
     echo -e "    \e[4mListado de Bookmarks\e[0m"
-    cat  $BOOKMARKS | cut -d" " -f2- | nl -s ". " | sed '/^ *$/d'
+    cat  $BOOKMARKS | cut -d" " -f2- | nl -s ". " | grep -i "$2" | sed '/^ *$/d' 
     exit 1
 fi
+
 
 if [ "$MT" = "bme" ]
 then
