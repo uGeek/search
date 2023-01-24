@@ -52,6 +52,7 @@ sx   tl              -> Buscar y ver Canales en Telegram
 sx   trello          -> Trello
 sx   imdb            -> IMDB
 sx   tm              -> TheMovieDb
+sx   ar              -> Archive.org
 sx   e               -> Abrir archivo de configuración, para cambiar el navegador
 sx   nav             -> Cambiar de navegador. Ejem: sx nav brave
 sx   terminal        -> Cambiar a navegador de terminal. Ejem: sx terminal y  | sx terminal n
@@ -137,6 +138,8 @@ tl="https://t.me/s/"
 tw="https://twitter.com/search?q="
 twt="https://twitter.com/i/trends"
 tm="https://www.themoviedb.org/search?language="$LANG"&query="
+ar="https://web.archive.org/web/*/"
+qw="https://www.qwant.com/?q="
 
 MT=$(echo $1)
 
@@ -319,6 +322,17 @@ then
     MOTOR="Twitter"
 fi
 
+if [ "$MT" = "ar" ]
+then
+    CMD="$BROWSER  $ar"
+    MOTOR="archive.org"
+fi
+
+if [ "$MT" = "qw" ]
+then
+    CMD="$BROWSER  $qw"
+    MOTOR="qwant"
+fi
 
 if [ "$MT" = "twt" ]
 then
