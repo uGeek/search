@@ -75,7 +75,7 @@ else
 echo
 echo -e "\n\e[31mHay una nueva actualización de la aplicación\e[0m \e[1msearch\e[0m\n\t\e[92mva a procederse la instalación\e[0m\n"
 sudo curl -L https://raw.githubusercontent.com/uGeek/search/master/search \
-          -o /usr/bin/s && sudo chmod +x /usr/bin/s
+          -o /usr/bin/sx && sudo chmod +x /usr/bin/sx
 clear	  
 echo -e "\n\t\e[1msearch.\e[0m \e[92mVersión $(wget -q -O- https://raw.githubusercontent.com/uGeek/search/master/search | grep "VERSION=" | cut -d "=" -f2 | sed s'|"||'g) actualizada con éxito! \e[0m\n"	  
 exit 0
