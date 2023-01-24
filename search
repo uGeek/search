@@ -50,6 +50,8 @@ sx   trello          -> Trello
 sx   imdb            -> IMDB
 sx   tm              -> TheMovieDb
 sx   e               -> Abrir archivo de configuración, para cambiar el navegador
+sx   nav             -> Cambia de navegador. Ejemplo: sx nav brave
+sx   terminal        -> Habilita navegador para terminal. Ejemplo: sx terminal y
 sx   h, -h, --help   -> Ayuda
 
 search "$VERSION"
@@ -315,7 +317,21 @@ if [ "$MT" = "twt" ]
 then
     CMD="$BROWSER  $twt"
     MOTOR=" Tendencias de Twitter"
-    nohup $CMD 2>/dev/null  &
+    nohup $CMD 2>/dev/null  &if [ "$1" = "nav" ]
+then
+echo "Cambiando al navegador $2"
+sed -i "s|^BROWSER=.*|BROWSER='$2'|" $HOME/.config/search/search.conf
+exit
+fi
+
+if [ "$1" = "terminal" ]
+then
+echo "Versión de terminal=$2"
+sed -i "s|^TERMINAL=.*|TERMINAL='$2'|"  $HOME/.config/search/search.conf
+exit
+fi
+
+
     exit 1
 fi
 
@@ -354,7 +370,21 @@ then
     MOTOR="Seleccina el Bookmarks"
     echo ""
     echo -e "    \e[4mListado de Bookmarks\e[0m"
-    cat  $BOOKMARKS | cut -d" " -f2- | nl -s ". " | sed '/^ *$/d'
+    cat  $BOOKMARKS | cut -d" " -f2- | nl -s ". " | sed '/^ *$/d'if [ "$1" = "nav" ]
+then
+echo "Cambiando al navegador $2"
+sed -i "s|^BROWSER=.*|BROWSER='$2'|" $HOME/.config/search/search.conf
+exit
+fi
+
+if [ "$1" = "terminal" ]
+then
+echo "Versión de terminal=$2"
+sed -i "s|^TERMINAL=.*|TERMINAL='$2'|"  $HOME/.config/search/search.conf
+exit
+fi
+
+
     echo -en "\n \e[1mSearch\e[0m \e[31m$MOTOR\e[0m: "
     read INPUT
     nohup $CMD $(cat  $BOOKMARKS | cut -d" " -f1  | sed -n "$INPUT"p) 2>/dev/null  &
@@ -433,6 +463,24 @@ then
     nohup $CMD "https://search.yahoo.com/search?p="$(echo $INPUT | sed s'| |%20|'g)"&ei=UTF-8" 2>/dev/null &
     exit 1
 fi
+
+
+if [ "$1" = "nav" ]
+then
+echo "Cambiando al navegador $2"
+sed -i "s|^BROWSER=.*|BROWSER='$2'|" $HOME/.config/search/search.conf
+exit
+fi
+
+if [ "$1" = "terminal" ]
+then
+echo "Versión de terminal=$2"
+sed -i "s|^TERMINAL=.*|TERMINAL='$2'|"  $HOME/.config/search/search.conf
+exit
+fi
+
+
+
 
 source ~/.config/search/search.engine
 
