@@ -375,12 +375,26 @@ else
 fi
 fi
 
+
 if [ "$MT" = "bmls" ]
 then
+
+    if [ "$2" = "" ] ; then
     echo ""
     echo -e "    \e[4mListado de Bookmarks\e[0m"
     cat  $BOOKMARKS | cut -d" " -f2- | nl -s ". " | grep -i "$2" | sed '/^ *$/d' 
-    exit 1
+    exit
+    fi
+    
+    echo ""
+    echo -e "    \e[4mListado de Bookmarks\e[0m"
+    cat  $BOOKMARKS | cut -d" " -f2- | nl -s ". " | grep -i "$2" | sed '/^ *$/d' 
+    echo -en "\n \e[1mSearch\e[0m \e[31m$MOTOR\e[0m: "
+    read INPUT
+    CMD="$BROWSER"
+    if [ "$TERMINAL" = "y" ] ; then   $CMD $(cat  $BOOKMARKS | cut -d" " -f1  | sed -n "$INPUT"p) ; exit  ; fi
+    nohup $CMD $(cat  $BOOKMARKS | cut -d" " -f1  | sed -n "$INPUT"p) 2>/dev/null &
+    exit
 fi
 
 
